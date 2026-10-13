@@ -1,0 +1,22 @@
+.mantra-score-player{border:1px solid var(--line);border-radius:10px;padding:18px;margin:24px 0;background:var(--bg);color:var(--fg)}
+.mantra-score-player h2{margin-top:0}.mantra-score-player .score-description,.mantra-score-player .score-caption,.mantra-score-player .score-note{color:var(--muted)}
+.mantra-score-player .score-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:18px 0}
+.mantra-score-player .score-controls label{min-width:130px;flex:1}.mantra-score-player .score-controls input[type=number]{font:inherit;border:1px solid var(--line);border-radius:7px;padding:10px;min-height:44px;min-width:0;width:100%;background:var(--bg);color:var(--fg)}
+.mantra-score-player .score-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:14px 0}.mantra-score-player .score-actions label{display:flex;flex-direction:row;align-items:center;gap:7px;min-height:44px}.mantra-score-player input[type=checkbox]{width:18px;height:18px}
+.mantra-score-player .score-start{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.mantra-score-player .score-status{min-height:1.6em;margin:8px 0}.mantra-score-player .score-current{font-variant-numeric:tabular-nums;min-height:1.6em;margin:5px 0;color:var(--muted)}
+.mantra-score-player .score-progress{width:100%;height:7px;accent-color:var(--accent)}
+.mantra-score-player .score-system-wrap{overflow-x:auto;overflow-y:hidden;padding:0 0 6px;margin-top:14px;max-width:100%;overscroll-behavior-x:contain}
+.mantra-score-player .score-system{display:block;max-width:none;color:var(--fg)}
+.mantra-score-player .score-struct,.mantra-score-player .score-stem{stroke:currentColor;stroke-width:1.3;fill:none}
+.mantra-score-player .score-head{fill:currentColor;stroke:currentColor;stroke-width:1.2}.mantra-score-player .score-hollow{fill:var(--bg)}
+.mantra-score-player .score-dot,.mantra-score-player .score-rest{fill:currentColor}
+.mantra-score-player .score-label{fill:currentColor;font:13px system-ui,'Segoe UI',sans-serif}
+.mantra-score-player .score-lyric{fill:currentColor;font:14px system-ui,'Segoe UI',sans-serif}
+.mantra-score-player .score-pitch-name{fill:var(--muted);font:12px system-ui,'Segoe UI',sans-serif}
+.mantra-score-player .score-clef{fill:currentColor;font:50px 'Segoe UI Symbol','Noto Music',serif}
+.mantra-score-player .score-accidental{fill:currentColor;font:23px 'Segoe UI Symbol','Noto Music',serif}
+.mantra-score-player .score-active{color:var(--accent)}.mantra-score-player .score-active .score-head{stroke-width:2.2}.mantra-score-player .score-active .score-lyric{font-weight:700}
+.mantra-score-player .score-note{font-size:.875rem;line-height:1.5}.mantra-score-player .score-caption{font-size:.9rem;margin:8px 0}
+@media(max-width:650px){.mantra-score-player{padding:14px}.mantra-score-player .score-controls{gap:10px}.mantra-score-player .score-controls label{min-width:110px}.mantra-score-player .score-system-wrap{margin-top:8px}}
+@media print{.mantra-score-player{break-inside:auto;border:0;padding:0}.mantra-score-player .score-controls,.mantra-score-player .score-actions,.mantra-score-player .score-progress,.mantra-score-player .score-status,.mantra-score-player .score-current{display:none}.mantra-score-player .score-system-wrap{overflow:visible;break-inside:avoid}.mantra-score-player .score-system{width:100%;height:auto;max-width:100%}}

@@ -8,7 +8,10 @@
   <title>Harmonium a mantry — skutočné prednesy</title>
   <meta name="description" content="Uč sa mantry podľa skutočného spevu a harmonia: Gájatrí, Mahámritjundžaja, Púrnam adah, Lókáh samastáh a česká výučba. Spomalenie a opakovanie úseku.">
   <link rel="stylesheet" href="real-studio.css">
+  <link rel="stylesheet" href="score-player.css">
   <script src="real-sources.js" defer></script>
+  <script src="real-scores.js" defer></script>
+  <script src="score-player.js" defer></script>
   <script src="real-studio.js" defer></script>
 </head>
 <body>
@@ -17,7 +20,7 @@
     <p class="eyebrow">Spev · harmonium · spoločná prax</p>
     <h1>Harmonium a mantry</h1>
     <p class="intro">Uč sa podľa konkrétneho prednesu. Počúvaj hlas, sleduj klávesy a opakuj krátky úsek, kým ho zahráš a zaspievaš plynulo.</p>
-    <nav aria-label="Pomôcky"><a href="#text">Text a podklady</a><a href="#postup">Ako cvičiť</a><a href="technical-exercises.html">Technické cvičenia</a><a href="harmonium-mantry.pdf" target="_blank" rel="noopener">PDF pôvodných cvičení</a></nav>
+    <nav aria-label="Pomôcky"><a href="#notation">Noty a MIDI</a><a href="real-mantra-notes.pdf" target="_blank" rel="noopener">PDF overených nôt</a><a href="#text">Text a podklady</a><a href="#postup">Ako cvičiť</a><a href="technical-exercises.html">Technické cvičenia</a></nav>
   </header>
   <section aria-label="Výber prednesu">
     <div class="selectors">
@@ -47,6 +50,12 @@
     </fieldset>
     <noscript><p>Zapni JavaScript na výber videa a opakovanie úsekov. <a href="https://www.jenloyoga.com/harmonium">Prednesy Jen Lo</a> sú dostupné aj na stránke autorky.</p></noscript>
   </section>
+  <section id="notation" aria-label="Noty a prehrávanie melódie">
+    <h2>Noty a prehrávanie melódie</h2>
+    <div id="score-panel"></div>
+    <div id="score-unavailable" hidden><p>K tomuto konkrétnemu prednesu zatiaľ nemáme overený notový prepis.</p><button id="choose-score" type="button" hidden>Vybrať prednes s notami</button></div>
+    <p class="small">Prehrávanie nôt používa syntetický zvuk. Tempo a transpozícia platia pre noty a MIDI; originálne video má vlastné ovládanie. Voľné frázovanie a ozdoby prednesu sa uč podľa videa.</p>
+  </section>
   <section id="text" class="study-grid">
     <div><h2>Text mantry</h2><div id="lyrics" class="lyrics"></div><a id="text-source" target="_blank" rel="noopener">Zdroj tradičného textu</a></div>
     <div><h2>Podklady k tejto verzii</h2><p id="notes-info"></p><a id="notes-source" target="_blank" rel="noopener"></a><p id="version-info" class="small"></p><a id="author-source" target="_blank" rel="noopener">Stránka autora / učiteľa</a></div>
@@ -59,7 +68,7 @@
       <li><strong>6 minút:</strong> spievaj pri samostatnom akordickom sprievode podľa videa.</li>
       <li><strong>4 minúty:</strong> spoj frázy a nahraj si vlastné prevedenie.</li>
     </ol>
-    <p>Vybrané videá obsahujú konkrétne učiteľské verzie. Melódia a frázovanie sa môžu medzi interpretmi líšiť. Text nie je automaticky synchronizovaný s videom; podklady otváraj pre tú istú verziu.</p>
+    <p>Vybrané videá obsahujú konkrétne učiteľské verzie. Melódia a frázovanie sa môžu medzi interpretmi líšiť. Zvýraznenie nôt sleduje syntetické prehrávanie; s videom nie je automaticky synchronizované.</p>
     <p>Spomalenie mení rýchlosť prednesu. Pre zmenu tóniny na vlastnom harmoniu použiješ transpozíciu; táto stránka výšku originálneho videa nemení.</p>
   </section>
   <details class="legacy"><summary>Pôvodné technické cvičenia a ich PDF</summary><p>Pôvodné melódie, syntetické ukážky a partitúry boli vytvorené na tréning koordinácie, obratov a transpozície. Nezodpovedajú melódiám videí vyššie.</p><p><a href="technical-exercises.html">Otvoriť technické štúdio</a> · <a href="harmonium-mantry.pdf" target="_blank" rel="noopener">PDF cvičení</a></p></details>

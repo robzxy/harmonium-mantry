@@ -4,8 +4,9 @@
  const el=id=>document.getElementById(id);
  const mantra=el('mantra'),version=el('version'),wrap=el('video-wrap'),status=el('player-status'),rate=el('rate'),loop=el('loop');
  let piece=pieces[0],recording=piece.versions[0],player=null,ready=false,generation=0,poll=null,seekGuard=0,readyTimer=null;
- let interval={a:0,b:null},preferences={piece:'gayatri',versions:{},intervals:{}};
- try{const saved=JSON.parse(localStorage.getItem('harmonium-real-v1')||'null');if(saved&&typeof saved==='object'){preferences={...preferences,...saved};if(!preferences.versions||typeof preferences.versions!=='object')preferences.versions={};if(!preferences.intervals||typeof preferences.intervals!=='object')preferences.intervals={};}}catch{}
+ let scorePlayer=null;
+ let interval={a:0,b:null},preferences={piece:'lokah',versions:{},intervals:{},scoresIntroduced:true};
+ try{const saved=JSON.parse(localStorage.getItem('harmonium-real-v1')||'null');if(saved&&typeof saved==='object'){preferences={...preferences,...saved};if(!preferences.versions||typeof preferences.versions!=='object')preferences.versions={};if(!preferences.intervals||typeof preferences.intervals!=='object')preferences.intervals={};if(!saved.scoresIntroduced){preferences.piece='lokah';preferences.scoresIntroduced=true;for(const p of pieces){if(p.defaultVersion)preferences.versions[p.id]=p.defaultVersion;}}}}catch{}
  const fmt=t=>{t=Math.max(0,Number(t)||0);const m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+String(s).padStart(2,'0');};
  const parse=s=>{s=String(s).trim().replace(',','.');if(/^\d+(\.\d+)?$/.test(s))return Number(s);if(/^\d+:\d{1,2}(\.\d+)?$/.test(s)){const [m,v]=s.split(':').map(Number);if(v<60)return m*60+v;}return NaN;};
  const persist=(saveInterval=true)=>{preferences.piece=piece.id;preferences.versions[piece.id]=recording.id;if(saveInterval)preferences.intervals[recording.id]={a:interval.a,b:interval.b};try{localStorage.setItem('harmonium-real-v1',JSON.stringify(preferences));}catch{}};
@@ -41,7 +42,7 @@
  function stateChanged(event){
   stopPoll();
   refreshMetadata();
-  if(event.data===1){setMessage('Prehráva sa '+recording.performer);poll=setInterval(updateTime,200);}
+  if(event.data===1){scorePlayer?.pause();setMessage('Prehráva sa '+recording.performer);poll=setInterval(updateTime,200);}
   else if(event.data===2){setMessage('Pozastavené');updateTime();}
   else if(event.data===3)setMessage('Načítavam video…');
   else if(event.data===0){if(loop.checked&&validate(false)){player.seekTo(interval.a,true);player.playVideo();}else setMessage('Prednes dokončený');}
@@ -53,6 +54,11 @@
   el('lyrics').replaceChildren(...piece.text.map(line=>{const p=document.createElement('p');p.textContent=line;return p;}));
   el('text-source').href=piece.textSource;el('notes-info').textContent=recording.notesInfo;el('notes-source').href=recording.notesUrl;el('notes-source').textContent=recording.notesLabel;el('version-info').textContent=recording.info;el('author-source').href=recording.source;
   el('watch').href='https://www.youtube.com/watch?v='+recording.id;
+  scorePlayer?.destroy();scorePlayer=null;
+  const score=window.MANTRA_SCORES?.[recording.scoreId];
+  el('score-panel').replaceChildren();el('score-panel').hidden=!score;el('score-unavailable').hidden=!!score;
+  el('choose-score').hidden=!piece.versions.some(v=>window.MANTRA_SCORES?.[v.scoreId]);
+  if(score){scorePlayer=window.MantraScorePlayer.mount(el('score-panel'),score);}
  }
  async function load(){
   const current=++generation;stopPoll();seekGuard=0;clearTimeout(readyTimer);setReady(false);
@@ -74,6 +80,8 @@
  mantra.replaceChildren(...pieces.map(p=>new Option(p.title,p.id)));piece=pieces.find(p=>p.id===preferences.piece)||pieces[0];recording=piece.versions.find(v=>v.id===preferences.versions[piece.id])||piece.versions[0];mantra.value=piece.id;
  mantra.addEventListener('change',()=>{piece=pieces.find(p=>p.id===mantra.value);recording=piece.versions.find(v=>v.id===preferences.versions[piece.id])||piece.versions[0];persist(false);load();});
  version.addEventListener('change',()=>{recording=piece.versions.find(v=>v.id===version.value);persist(false);load();});
+ el('choose-score').addEventListener('click',()=>{recording=piece.versions.find(v=>window.MANTRA_SCORES?.[v.scoreId]);persist(false);load();});
+ el('score-panel').addEventListener('scoreplay',()=>{if(ready&&player.getPlayerState()===1)player.pauseVideo();});
  el('play').addEventListener('click',()=>{if(!ready)return;if(player.getPlayerState()===1)player.pauseVideo();else{if(loop.checked&&validate(false)&&(player.getCurrentTime()<interval.a||player.getCurrentTime()>=interval.b))player.seekTo(interval.a,true);player.playVideo();}});
  rate.addEventListener('change',()=>{if(ready)player.setPlaybackRate(Number(rate.value));});
  el('mark-start').addEventListener('click',()=>{if(ready){el('start').value=fmt(player.getCurrentTime());validate();}});
@@ -82,7 +90,7 @@
  loop.addEventListener('change',()=>{if(loop.checked&&!validate())loop.checked=false;});
  el('go-start').addEventListener('click',()=>{if(ready&&validate()){seekGuard=Date.now()+700;player.seekTo(interval.a,true);}});
  document.addEventListener('visibilitychange',()=>{if(document.hidden&&ready&&loop.checked&&player.getPlayerState()===1)player.pauseVideo();});
- window.addEventListener('pagehide',()=>{stopPoll();if(player&&ready)try{player.pauseVideo();}catch{}});
- window.realStudioQA={getSelection:()=>({piece:piece.id,video:recording.id}),getInterval:()=>({...interval}),isReady:()=>ready};
+ window.addEventListener('pagehide',()=>{stopPoll();scorePlayer?.stop();if(player&&ready)try{player.pauseVideo();}catch{}});
+ window.realStudioQA={getSelection:()=>({piece:piece.id,video:recording.id,score:recording.scoreId||null}),getInterval:()=>({...interval}),isReady:()=>ready,getScorePlayer:()=>scorePlayer};
  load();
 })();
