@@ -1,21 +1,26 @@
 # Harmonium a mantry
 
-Interaktívne štúdio pre Gāyatrī, Mahāmṛtyuñjaya, Pūrṇam adaḥ a Lokāḥ samastāḥ: noty, zvýrazňovanie hranej noty, melódia, akordový sprievod, opakovanie fráz a transpozícia.
+Hlavné štúdio používa skutočné prednesy a učiteľské videá od Jen Lo, Yoga Vidya a Moniky Winklerovej. Videá sa streamujú zo zdrojových YouTube kanálov; zvuk ani video autorov nie sú skopírované do repozitára.
 
-[Otvoriť štúdio](index.html) · [Notové podklady v PDF](harmonium-mantry.pdf)
+[Otvoriť štúdio](index.html) · [Pôvodné technické cvičenia](technical-exercises.html) · [PDF pôvodných cvičení](harmonium-mantry.pdf)
 
-## Zverejnenie cez GitHub Pages
+## Ovládanie
 
-Balík je hotová statická stránka. Nevyžaduje lokálny build, npm, vlastný server ani backend.
+Vyber mantru a prednes. Spusti video. Na cvičenie nastav začiatok A a koniec B tlačidlami pri aktuálnom čase alebo ručne a zapni Opakovať A–B. Rýchlosti ponúka konkrétny YouTube prehrávač. Vyhľadávanie a opakovanie úsekov je približné; nepoužíva synchronizovaný notový prepis.
 
-1. Rozbaľ ZIP do priečinka na počítači.
-2. Vytvor na GitHube repozitár alebo otvor vybraný existujúci repozitár. Pre GitHub Free použi verejný repozitár.
-3. Nahraj **obsah rozbaleného balíka** do koreňa vetvy `main` cez **Add file → Upload files** a potvrď **Commit changes**. Nenahrávaj samotný ZIP ani nadradený priečinok. `index.html`, PDF a prázdny súbor `.nojekyll` majú byť priamo v koreni; zachovaj ostatné priečinky.
-4. Otvor **Settings → Pages**. V časti **Build and deployment** zvoľ **Source: Deploy from a branch**, vetvu **main**, priečinok **/(root)** a klikni **Save**. [Oficiálny postup GitHubu](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-5. Po dokončení nasadenia klikni na **Visit site**. Zverejnenie zmien môže trvať až desať minút. `.nojekyll` vypína spracovanie cez Jekyll; stránka už obsahuje pripravené HTML. [Vytvorenie statickej stránky](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
+Podklady pri každom videu odkazujú na rovnakú učiteľskú verziu, keď sú dostupné. Jen Lo ponúka sprievodný platený spevník k svojim videám. Pri výukovej verzii Lokah sú noty a akordy na stránke Yoga Vidya. PDF v tomto repozitári obsahuje skoršie vygenerované technické cvičenia a nie je prepisom vložených prednesov.
 
-## Používanie
+## Zverejnenie na GitHub Pages
 
-Zvuk sa spustí až po kliknutí na **Prehrať**. Vyber mantru, úsek, tempo a tóninu. V režime akordov môžeš spievať vlastnú melódiu. Záložné vložené ukážky WAV majú vlastné ovládanie prehrávania a fungujú aj bez syntézy Web Audio; používajú pevné pôvodné tempo a tóninu. PDF otvoríš alebo stiahneš cez odkaz na stránke.
+Nahraj celý obsah balíka do koreňa vetvy main. V Settings → Pages nastav Deploy from a branch → main → /(root). Súbor .nojekyll je súčasťou balíka. Nie je potrebný build ani backend.
 
-Melódie sú štyri pôvodné študijné zhudobnenia tradičných textov. Nejde o védsku recitáciu ani prepis konkrétnych nahrávok. Syntetické ukážky neobsahujú spev; výslovnosť a tradičný prednes si osvoj podľa učiteľa alebo zdrojového videa.
+Na vložené YouTube prehrávanie treba internet a bežnú HTTP(S) adresu stránky. WebView musí poslať pôvod stránky (Referer); stránka používa strict-origin-when-cross-origin. Ak prehrávač nie je dostupný, vždy je k dispozícii odkaz Otvoriť na YouTube.
+
+## Zdroje
+
+- https://www.jenloyoga.com/harmonium
+- https://www.jenloyoga.com/harmonium-store
+- https://mein.yoga-vidya.de/profiles/blogs/lokah-samastah-lokah-samastah
+- https://shaktiyoga.cz/om-nama-sivaja-gurave/
+- https://developers.google.com/youtube/iframe_api_reference
+- https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
